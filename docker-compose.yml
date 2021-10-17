@@ -3,7 +3,6 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest
-    restart: always
     container_name: cypher-db
     ports:
       - "5432:5432"
