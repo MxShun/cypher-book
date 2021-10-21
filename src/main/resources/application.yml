@@ -10,4 +10,3 @@ server:
     whitelabel:
       enabled: false
   shutdown: graceful # default lifecycle 30s
-
