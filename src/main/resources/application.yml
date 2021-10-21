@@ -1,1 +1,11 @@
-
+# https://spring.pleiades.io/spring-boot/docs/current/reference/html/application-properties.html
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+server:
+  error:
+    whitelabel:
+      enabled: false
