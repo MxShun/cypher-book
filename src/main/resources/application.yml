@@ -1,7 +1,6 @@
 # https://spring.pleiades.io/spring-boot/docs/current/reference/html/application-properties.html
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/cypher
     username: cypher
     password: ${DATASOURCE_PASSWORD:cypher}
