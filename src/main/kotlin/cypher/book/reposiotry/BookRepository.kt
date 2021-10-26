@@ -17,7 +17,11 @@ class BookRepository(private val jdbcTemplate: JdbcTemplate) {
     fun selectAll(): List<Book> = jdbcTemplate.query(
         """
             SELECT
-                isbn, title, author, publisher, price
+                isbn,
+                title,
+                author,
+                publisher,
+                price
             FROM
                 book
         """,
@@ -42,7 +46,11 @@ class BookRepository(private val jdbcTemplate: JdbcTemplate) {
         return jdbcTemplate.query(
             """
                 SELECT
-                    isbn, title, author, publisher, price
+                    isbn,
+                    title,
+                    author,
+                    publisher,
+                    price
                 FROM
                     book
                 WHERE
