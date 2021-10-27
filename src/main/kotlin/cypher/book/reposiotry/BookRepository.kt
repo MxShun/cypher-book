@@ -31,6 +31,7 @@ class BookRepository(private val jdbcTemplate: JdbcTemplate) {
     /**
      * 本を isbn で検索する
      * isbn が未指定 null の場合は一覧を取得する
+     * NOTE: 本当は title、author、publisher を自由に組み合わせて絞り込み検索できるようにしたい
      *
      * @param isbn 国際標準図書番号
      *
