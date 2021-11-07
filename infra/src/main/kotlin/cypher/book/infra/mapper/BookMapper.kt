@@ -25,7 +25,7 @@ class BookMapper(private val jdbcTemplate: JdbcTemplate) {
             FROM
                 book
         """,
-        DataClassRowMapper(Book ::class.java),
+        DataClassRowMapper(Book::class.java),
     )
 
     /**
