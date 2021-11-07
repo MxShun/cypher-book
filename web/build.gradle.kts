@@ -1,6 +1,6 @@
 dependencies {
-    // NOTE web は infra レイヤーに依存しない。
-    // しかし、SpringBootApplication が infra レイヤーのコンポーネントを DI できないのでやむなく。
+    // NOTE web は infra に依存しない。
+    // しかし、SpringBootApplication が infra モジュールのコンポーネントを DI できないのでやむなく。
     runtimeOnly(project(":infra"))
 
     implementation(project(":application"))
