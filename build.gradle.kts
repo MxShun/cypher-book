@@ -18,9 +18,9 @@ repositories {
 
 detekt {
 	toolVersion = "1.18.1"
-	buildUponDefaultConfig = true // preconfigure defaults
-	allRules = false // activate all available (even unstable) rules.
-	config = files("$projectDir/detekt/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
+	buildUponDefaultConfig = true
+	allRules = false
+	config = files("$projectDir/detekt/detekt.yml")
 }
 
 dependencies {
@@ -44,7 +44,6 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
-	// Target version of the generated JVM bytecode. It is used for type resolution.
 	jvmTarget = "11"
 }
 
