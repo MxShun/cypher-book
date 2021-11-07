@@ -3,7 +3,7 @@ package cypher.book
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = ["cypher.book"])
 class BookApplication
 
 @Suppress("SpreadOperator")
