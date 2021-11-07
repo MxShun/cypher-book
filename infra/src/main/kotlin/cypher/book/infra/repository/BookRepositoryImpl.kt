@@ -22,7 +22,6 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
 
     /**
      * 本を isbn で検索する
-     * isbn が未指定 null の場合は一覧を取得する
      *
      * @param isbn 国際標準図書番号
      *
@@ -30,11 +29,7 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
      *
      * @throws DataAccessException
      */
-    override fun fetchBy(isbn: String?): List<cypher.book.domain.entity.Book> {
-        if (isbn == null) {
-            return fetchAll()
-        }
-
+    override fun fetchBy(isbn: String): List<cypher.book.domain.entity.Book> {
         val books: List<Book> = bookMapper.selectBy(isbn = isbn)
 
         return books.toEntities()

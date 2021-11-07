@@ -15,5 +15,5 @@ interface BookRepository {
      *
      * @return List<Book> 検索結果本リスト
      */
-    fun fetchBy(isbn: String?): List<Book>
+    fun fetchBy(isbn: String): List<Book>
 }
