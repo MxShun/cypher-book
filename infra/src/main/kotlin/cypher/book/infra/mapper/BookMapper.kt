@@ -14,15 +14,15 @@ class BookMapper(private val jdbcTemplate: JdbcTemplate) {
      */
     fun selectAll(): List<Book> = jdbcTemplate.query(
         """
-                SELECT
-                    isbn,
-                    title,
-                    author,
-                    publisher,
-                    price
-                FROM
-                    book
-            """,
+            SELECT
+                isbn,
+                title,
+                author,
+                publisher,
+                price
+            FROM
+                book
+        """,
         DataClassRowMapper(Book ::class.java),
     )
 
@@ -36,17 +36,17 @@ class BookMapper(private val jdbcTemplate: JdbcTemplate) {
      */
     fun selectBy(isbn: String): List<Book> = jdbcTemplate.query(
         """
-                SELECT
-                    isbn,
-                    title,
-                    author,
-                    publisher,
-                    price
-                FROM
-                    book
-                WHERE
-                    isbn = ?
-            """,
+            SELECT
+                isbn,
+                title,
+                author,
+                publisher,
+                price
+            FROM
+                book
+            WHERE
+                isbn = ?
+        """,
         DataClassRowMapper(Book::class.java),
         isbn
     )
