@@ -24,6 +24,8 @@ class BookController(private val fetchBook: FetchBook) {
     /**
      * 本を isbn で検索する
      *
+     * @param String? isbn 国際標準図書番号
+     *
      * @return List<BookResponse> 検索結果本リスト
      */
     @GetMapping("/search")
@@ -36,7 +38,7 @@ class BookController(private val fetchBook: FetchBook) {
     /**
      * Book エンティティをレスポンス DTO に変換するヘルパー関数
      *
-     * @return List<BookResponse> 本のレスポンスDTO
+     * @return List<BookResponse> 本のレスポンス DTO
      */
     private fun List<Book>.toResponses(): List<BookResponse> = map {
         BookResponse(

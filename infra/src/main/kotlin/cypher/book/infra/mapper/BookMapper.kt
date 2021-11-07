@@ -11,6 +11,8 @@ class BookMapper(private val jdbcTemplate: JdbcTemplate) {
      * 本一覧取得
      *
      * @return List<Book> 本一覧リスト
+     *
+     * @throws DataAccessException
      */
     fun selectAll(): List<Book> = jdbcTemplate.query(
         """
@@ -30,9 +32,11 @@ class BookMapper(private val jdbcTemplate: JdbcTemplate) {
      * 本を isbn で検索する
      * NOTE: 本当は title、author、publisher を自由に組み合わせて絞り込み検索できるようにしたい
      *
-     * @param isbn 国際標準図書番号
+     * @param String isbn 国際標準図書番号
      *
      * @return List<Book> 検索結果本リスト
+     *
+     * @throws DataAccessException
      */
     fun selectBy(isbn: String): List<Book> = jdbcTemplate.query(
         """

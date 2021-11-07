@@ -13,6 +13,8 @@ interface BookRepository {
     /**
      * 本を isbn で検索する
      *
+     * @param String isbn 国際標準図書番号
+     *
      * @return List<Book> 検索結果本リスト
      */
     fun fetchBy(isbn: String): List<Book>

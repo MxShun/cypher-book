@@ -11,8 +11,6 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
      * 本一覧取得
      *
      * @return List<cypher.book.domain.entity.Book> 本一覧リスト
-     *
-     * @throws DataAccessException
      */
     override fun fetchAll(): List<cypher.book.domain.entity.Book> {
         val books: List<Book> = bookMapper.selectAll()
@@ -23,11 +21,9 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
     /**
      * 本を isbn で検索する
      *
-     * @param isbn 国際標準図書番号
+     * @param String isbn 国際標準図書番号
      *
      * @return List<cypher.book.domain.entity.Book> 検索結果本リスト
-     *
-     * @throws DataAccessException
      */
     override fun fetchBy(isbn: String): List<cypher.book.domain.entity.Book> {
         val books: List<Book> = bookMapper.selectBy(isbn = isbn)
