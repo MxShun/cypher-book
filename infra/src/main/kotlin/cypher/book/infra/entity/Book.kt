@@ -1,7 +1,7 @@
-package cypher.book.web.entity
+package cypher.book.infra.entity
 
 /**
- * 本
+ * 本の DB コミュニケーション DTO
  *
  * @param isbn 国際標準図書番号 書籍出版物を一意に識別するユニークキー
  * @param title 題
