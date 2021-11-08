@@ -44,7 +44,7 @@ subprojects {
 	dependencies {
 		implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
-		implementation("io.github.microutils:kotlin-logging:1.12.5")
+		implementation("io.github.microutils:kotlin-logging-jvm:2.0.10")
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
 	}
 
