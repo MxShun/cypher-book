@@ -27,11 +27,10 @@ interface BookMapper {
 
     /**
      * 本を isbn で検索する
-     * NOTE: 本当は title、author、publisher を自由に組み合わせて絞り込み検索できるようにしたい
      *
      * @param String isbn 国際標準図書番号
      *
-     * @return List<Book> 検索結果本リスト
+     * @return Book? 検索結果の本
      *
      * @throws DataAccessException
      */
@@ -47,5 +46,5 @@ interface BookMapper {
         WHERE
             isbn = #{isbn}  
     """)
-    fun selectBy(isbn: String): List<Book>
+    fun selectBy(isbn: String): Book?
 }

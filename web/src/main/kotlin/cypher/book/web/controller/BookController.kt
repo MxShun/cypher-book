@@ -18,35 +18,33 @@ class BookController(private val fetchBook: FetchBook) {
     fun list(): List<BookResponse> {
         val books: List<Book> = fetchBook.fetchAll()
 
-        return books.toResponses()
+        return books.map { it.toResponse() }
     }
 
     /**
      * 本を isbn で検索する
      *
-     * @param String? isbn 国際標準図書番号
+     * @param String isbn 国際標準図書番号
      *
-     * @return List<BookResponse> 検索結果本リスト
+     * @return BookResponse 検索結果の本
      */
     @GetMapping("/search")
-    fun search(@RequestParam(required = false) isbn: String?): List<BookResponse> {
-        val books: List<Book> = fetchBook.fetchBy(isbn = isbn)
+    fun search(@RequestParam isbn: String): BookResponse {
+        val book: Book = fetchBook.fetchBy(isbn = isbn)
 
-        return books.toResponses()
+        return book.toResponse()
     }
 
     /**
      * Book エンティティをレスポンス DTO に変換するヘルパー関数
      *
-     * @return List<BookResponse> 本のレスポンス DTO
+     * @return BookResponse 本のレスポンス DTO
      */
-    private fun List<Book>.toResponses(): List<BookResponse> = map {
-        BookResponse(
-            isbn = it.isbn,
-            title = it.title,
-            author = it.author,
-            publisher = it.publisher,
-            price = it.price,
-        )
-    }
+    private fun Book.toResponse(): BookResponse = BookResponse(
+        isbn = isbn,
+        title = title,
+        author = author,
+        publisher = publisher,
+        price = price,
+    )
 }
