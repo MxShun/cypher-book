@@ -38,6 +38,8 @@ class BookController(private val fetchBook: FetchBook) {
     /**
      * Book エンティティをレスポンス DTO に変換するヘルパー関数
      *
+     * @receiver Book 本のエンティティ
+     *
      * @return BookResponse 本のレスポンス DTO
      */
     private fun Book.toResponse(): BookResponse = BookResponse(

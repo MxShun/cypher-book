@@ -35,6 +35,8 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
     /**
      * DB とのコミュニケーション DTO を Book エンティティに変換するヘルパー関数
      *
+     * @receiver Book DB とのコミュニケーション DTO
+     *
      * @return cypher.book.domain.entity.Book 本のエンティティ
      */
     private fun Book.toEntity() = cypher.book.domain.entity.Book(
