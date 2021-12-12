@@ -18,3 +18,7 @@ server:
     whitelabel:
       enabled: false
   shutdown: graceful # default lifecycle 30s
+# https://mybatis.org/mybatis-3/ja/configuration.html#properties
+mybatis:
+  configuration:
+    default-statement-timeout: 25
