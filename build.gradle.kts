@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.5.6" apply false
+	id("org.springframework.boot") version "2.6.1" apply false
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	id("io.gitlab.arturbosch.detekt") version "1.18.1"
-	kotlin("jvm") version "1.5.31"
-	kotlin("plugin.spring") version "1.5.31" apply false
+	id("io.gitlab.arturbosch.detekt") version "1.19.0"
+	kotlin("jvm") version "1.6.0"
+	kotlin("plugin.spring") version "1.6.0" apply false
 }
 
 group = "cypher"
@@ -17,14 +17,14 @@ repositories {
 }
 
 detekt {
-	toolVersion = "1.18.1"
+	toolVersion = "1.19.0"
 	buildUponDefaultConfig = true
 	allRules = false
 	config = files("$projectDir/detekt/detekt.yml")
 }
 
 dependencies {
-	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.18.1")
+	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.19.0")
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
