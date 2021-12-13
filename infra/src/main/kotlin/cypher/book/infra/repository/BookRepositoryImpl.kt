@@ -1,6 +1,7 @@
 package cypher.book.infra.repository
 
 import cypher.book.application.repository.BookRepository
+import cypher.book.domain.error.DataNotFountException
 import cypher.book.infra.entity.Book
 import cypher.book.infra.mapper.BookMapper
 import org.springframework.stereotype.Repository
@@ -15,7 +16,7 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
     override fun fetchAll(): List<cypher.book.domain.entity.Book> {
         val books: List<Book> = bookMapper.selectAll()
 
-        return books.toEntities()
+        return books.map { it.toEntity() }
     }
 
     /**
@@ -23,26 +24,26 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
      *
      * @param String isbn 国際標準図書番号
      *
-     * @return List<cypher.book.domain.entity.Book> 検索結果本リスト
+     * @return cypher.book.domain.entity.Book? 検索結果の本
      */
-    override fun fetchBy(isbn: String): List<cypher.book.domain.entity.Book> {
-        val books: List<Book> = bookMapper.selectBy(isbn = isbn)
+    override fun fetchBy(isbn: String): cypher.book.domain.entity.Book? {
+        val book: Book? = bookMapper.selectBy(isbn = isbn)
 
-        return books.toEntities()
+        return book?.toEntity()
     }
 
     /**
      * DB とのコミュニケーション DTO を Book エンティティに変換するヘルパー関数
      *
-     * @return List<cypher.book.domain.entity.Book> 本のエンティティ
+     * @receiver Book DB とのコミュニケーション DTO
+     *
+     * @return cypher.book.domain.entity.Book 本のエンティティ
      */
-    private fun List<Book>.toEntities() = map {
-        cypher.book.domain.entity.Book(
-            isbn = it.isbn,
-            title = it.title,
-            author = it.author,
-            publisher = it.publisher,
-            price = it.price,
-        )
-    }
+    private fun Book.toEntity() = cypher.book.domain.entity.Book(
+        isbn = isbn,
+        title = title,
+        author = author,
+        publisher = publisher,
+        price = price,
+    )
 }

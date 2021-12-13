@@ -1,12 +1,11 @@
 package cypher.book.infra.mapper
 
 import cypher.book.infra.entity.Book
-import org.springframework.jdbc.core.DataClassRowMapper
-import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.stereotype.Component
+import org.apache.ibatis.annotations.Mapper
+import org.apache.ibatis.annotations.Select
 
-@Component
-class BookMapper(private val jdbcTemplate: JdbcTemplate) {
+@Mapper
+interface BookMapper {
     /**
      * 本一覧取得
      *
@@ -14,44 +13,38 @@ class BookMapper(private val jdbcTemplate: JdbcTemplate) {
      *
      * @throws DataAccessException
      */
-    fun selectAll(): List<Book> = jdbcTemplate.query(
-        """
-            SELECT
-                isbn,
-                title,
-                author,
-                publisher,
-                price
-            FROM
-                book
-        """,
-        DataClassRowMapper(Book::class.java),
-    )
+    @Select("""
+        SELECT
+            isbn,
+            title,
+            author,
+            publisher,
+            price
+        FROM
+            book
+    """)
+    fun selectAll(): List<Book>
 
     /**
      * 本を isbn で検索する
-     * NOTE: 本当は title、author、publisher を自由に組み合わせて絞り込み検索できるようにしたい
      *
      * @param String isbn 国際標準図書番号
      *
-     * @return List<Book> 検索結果本リスト
+     * @return Book? 検索結果の本
      *
      * @throws DataAccessException
      */
-    fun selectBy(isbn: String): List<Book> = jdbcTemplate.query(
-        """
-            SELECT
-                isbn,
-                title,
-                author,
-                publisher,
-                price
-            FROM
-                book
-            WHERE
-                isbn = ?
-        """,
-        DataClassRowMapper(Book::class.java),
-        isbn
-    )
+    @Select("""
+        SELECT
+            isbn,
+            title,
+            author,
+            publisher,
+            price
+        FROM
+            book
+        WHERE
+            isbn = #{isbn}  
+    """)
+    fun selectBy(isbn: String): Book?
 }
