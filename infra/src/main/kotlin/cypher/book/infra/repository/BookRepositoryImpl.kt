@@ -1,7 +1,6 @@
 package cypher.book.infra.repository
 
 import cypher.book.application.repository.BookRepository
-import cypher.book.domain.error.DataNotFountException
 import cypher.book.infra.entity.Book
 import cypher.book.infra.mapper.BookMapper
 import org.springframework.stereotype.Repository
