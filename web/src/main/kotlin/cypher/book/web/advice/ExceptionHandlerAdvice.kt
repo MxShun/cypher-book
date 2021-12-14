@@ -18,5 +18,5 @@ class ExceptionHandlerAdvice {
     @ExceptionHandler(DataNotFountException::class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     fun handleDataNotFountException(exception: DataNotFountException): ErrorResponse =
-        ErrorResponse(reason = exception.message!!) // DataNotFountException しか補足しないため non-null assertion を許容する
+        ErrorResponse(reason = exception.message)
 }
