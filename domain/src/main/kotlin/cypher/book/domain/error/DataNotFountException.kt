@@ -4,5 +4,5 @@ package cypher.book.domain.error
  * Data が見つからなかったときの例外
  */
 class DataNotFountException(
-    message: String,
+    override val message: String,
 ) : Exception(message)
