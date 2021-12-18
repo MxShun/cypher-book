@@ -24,5 +24,6 @@ class FetchBook(private val bookRepository: BookRepository) {
      *
      * @throws DataNotFountException
      */
-    fun fetchBy(isbn: ISBN) = bookRepository.fetchBy(isbn = isbn) ?: throw DataNotFountException(message = "No Book found. isbn=$isbn")
+    fun fetchBy(isbn: ISBN) =
+        bookRepository.fetchBy(isbn = isbn) ?: throw DataNotFountException(message = "No Book found. isbn=$isbn")
 }

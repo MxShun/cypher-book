@@ -13,16 +13,18 @@ interface BookMapper {
      *
      * @throws DataAccessException
      */
-    @Select("""
-        SELECT
-            isbn,
-            title,
-            author,
-            publisher,
-            price
-        FROM
-            book
-    """)
+    @Select(
+        """
+            SELECT
+                isbn,
+                title,
+                author,
+                publisher,
+                price
+            FROM
+                book
+        """
+    )
     fun selectAll(): List<Book>
 
     /**
@@ -34,17 +36,19 @@ interface BookMapper {
      *
      * @throws DataAccessException
      */
-    @Select("""
-        SELECT
-            isbn,
-            title,
-            author,
-            publisher,
-            price
-        FROM
-            book
-        WHERE
-            isbn = #{isbn}
-    """)
+    @Select(
+        """
+            SELECT
+                isbn,
+                title,
+                author,
+                publisher,
+                price
+            FROM
+                book
+            WHERE
+                isbn = #{isbn}  
+        """
+    )
     fun selectBy(isbn: String): Book?
 }

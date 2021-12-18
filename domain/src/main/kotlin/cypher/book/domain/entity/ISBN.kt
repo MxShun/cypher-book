@@ -8,6 +8,7 @@ import com.google.common.annotations.VisibleForTesting
  * @property value 国際標準図書番号 書籍出版物を一意に識別するユニークキー
  */
 @JvmInline
+@Suppress("MagicNumber")
 value class ISBN(private val value: String) {
     init {
         validate()
@@ -39,7 +40,7 @@ value class ISBN(private val value: String) {
             (char.value - '0') * (10 - char.index)
         } + if (digits()[9] == 'X') 10 else digits()[9] - '0'
 
-        if (sum % 11 != 0) throw IllegalArgumentException("Invalid/unsupported isbn value")
+        require(sum % 11 == 0) { "Invalid/unsupported isbn value" }
     }
 
     /**
@@ -53,7 +54,7 @@ value class ISBN(private val value: String) {
             (char.value - '0') * if (char.index % 2 == 0) 1 else 3
         }
 
-        if (sum % 10 != 0) throw IllegalArgumentException("Invalid/unsupported isbn value")
+        require(sum % 10 == 0) { "Invalid/unsupported isbn value" }
     }
 
     /**
