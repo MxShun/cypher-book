@@ -1,6 +1,7 @@
 package cypher.book.application.repository
 
 import cypher.book.domain.entity.Book
+import cypher.book.domain.entity.ISBN
 
 interface BookRepository {
     /**
@@ -13,9 +14,9 @@ interface BookRepository {
     /**
      * 本を isbn で検索する
      *
-     * @param String isbn 国際標準図書番号
+     * @param ISBN isbn 国際標準図書番号
      *
      * @return Book? 検索結果本リスト
      */
-    fun fetchBy(isbn: String): Book?
+    fun fetchBy(isbn: ISBN): Book?
 }

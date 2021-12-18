@@ -44,7 +44,7 @@ interface BookMapper {
         FROM
             book
         WHERE
-            isbn = #{isbn}  
+            isbn = #{isbn}
     """)
     fun selectBy(isbn: String): Book?
 }

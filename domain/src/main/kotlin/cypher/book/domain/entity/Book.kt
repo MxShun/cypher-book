@@ -10,7 +10,7 @@ package cypher.book.domain.entity
  * @param price 価格
  */
 data class Book(
-    val isbn: String,
+    val isbn: ISBN,
     val title: String,
     val author: String,
     val publisher: String,
