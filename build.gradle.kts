@@ -21,6 +21,14 @@ detekt {
 	buildUponDefaultConfig = true
 	allRules = false
 	config = files("$projectDir/detekt/detekt.yml")
+	source = files(
+		subprojects.flatMap {
+			listOf(
+				"${it.projectDir}/src/main/kotlin",
+				"${it.projectDir}/src/test/kotlin",
+			)
+		}
+	)
 }
 
 dependencies {
