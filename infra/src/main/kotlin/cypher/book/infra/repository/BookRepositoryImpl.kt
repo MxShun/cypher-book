@@ -1,6 +1,7 @@
 package cypher.book.infra.repository
 
 import cypher.book.application.repository.BookRepository
+import cypher.book.domain.entity.ISBN
 import cypher.book.infra.entity.Book
 import cypher.book.infra.mapper.BookMapper
 import org.springframework.stereotype.Repository
@@ -21,12 +22,12 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
     /**
      * 本を isbn で検索する
      *
-     * @param String isbn 国際標準図書番号
+     * @param ISBN isbn 国際標準図書番号
      *
      * @return cypher.book.domain.entity.Book? 検索結果の本
      */
-    override fun fetchBy(isbn: String): cypher.book.domain.entity.Book? {
-        val book: Book? = bookMapper.selectBy(isbn = isbn)
+    override fun fetchBy(isbn: ISBN): cypher.book.domain.entity.Book? {
+        val book: Book? = bookMapper.selectBy(isbn = isbn.digits())
 
         return book?.toEntity()
     }
@@ -39,7 +40,7 @@ class BookRepositoryImpl(private val bookMapper: BookMapper) : BookRepository {
      * @return cypher.book.domain.entity.Book 本のエンティティ
      */
     private fun Book.toEntity() = cypher.book.domain.entity.Book(
-        isbn = isbn,
+        isbn = ISBN(value = isbn),
         title = title,
         author = author,
         publisher = publisher,

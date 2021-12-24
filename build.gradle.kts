@@ -53,6 +53,7 @@ subprojects {
 		implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		implementation("io.github.microutils:kotlin-logging-jvm:2.0.10")
+		implementation("com.google.guava:guava:31.0.1-jre")
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
 	}
 

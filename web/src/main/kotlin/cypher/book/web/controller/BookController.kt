@@ -2,14 +2,12 @@ package cypher.book.web.controller
 
 import cypher.book.application.usecase.FetchBook
 import cypher.book.domain.entity.Book
+import cypher.book.domain.entity.ISBN
 import cypher.book.web.response.BookResponse
-import org.hibernate.validator.constraints.ISBN
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@Validated
 @RestController
 class BookController(private val fetchBook: FetchBook) {
     /**
@@ -32,8 +30,9 @@ class BookController(private val fetchBook: FetchBook) {
      * @return BookResponse 検索結果の本
      */
     @GetMapping("/search")
-    fun search(@RequestParam @ISBN isbn: String): BookResponse {
-        val book: Book = fetchBook.fetchBy(isbn = isbn)
+    fun search(@RequestParam isbn: String): BookResponse {
+        // RequestParam に ISBN で受け取ると init が走らないため明示的にインスタンスを作って渡す
+        val book: Book = fetchBook.fetchBy(isbn = ISBN(value = isbn))
 
         return book.toResponse()
     }
@@ -46,7 +45,7 @@ class BookController(private val fetchBook: FetchBook) {
      * @return BookResponse 本のレスポンス DTO
      */
     private fun Book.toResponse(): BookResponse = BookResponse(
-        isbn = isbn,
+        isbn = isbn.digits(),
         title = title,
         author = author,
         publisher = publisher,

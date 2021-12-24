@@ -2,6 +2,7 @@ package cypher.book.application.usecase
 
 import cypher.book.application.repository.BookRepository
 import cypher.book.domain.entity.Book
+import cypher.book.domain.entity.ISBN
 import cypher.book.domain.error.DataNotFountException
 import org.springframework.stereotype.Component
 
@@ -17,12 +18,12 @@ class FetchBook(private val bookRepository: BookRepository) {
     /**
      * 本を isbn で検索する
      *
-     * @param String isbn 国際標準図書番号
+     * @param ISBN isbn 国際標準図書番号
      *
      * @return Book 検索結果の本
      *
      * @throws DataNotFountException
      */
-    fun fetchBy(isbn: String) =
+    fun fetchBy(isbn: ISBN) =
         bookRepository.fetchBy(isbn = isbn) ?: throw DataNotFountException(message = "No Book found. isbn=$isbn")
 }
