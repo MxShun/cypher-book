@@ -23,8 +23,14 @@ value class ISBN(private val value: String) {
     @VisibleForTesting
     fun validate() {
         when (digits().length) {
-            10 -> checkChecksumISBN10()
-            13 -> checkChecksumISBN13()
+            10 -> {
+                checkChecksumISBN10()
+                checkFormatISBN10()
+            }
+            13 -> {
+                checkChecksumISBN13()
+                checkFormatISBN13()
+            }
             else -> throw IllegalArgumentException("Invalid/unsupported isbn value length")
         }
     }
@@ -44,6 +50,16 @@ value class ISBN(private val value: String) {
     }
 
     /**
+     * ISBN-10 のフォーマット検査
+     *
+     * @throws IllegalArgumentException
+     */
+    @VisibleForTesting
+    fun checkFormatISBN10() {
+        require(ISBN10_FORMAT.matches(digitsWithHyphen())) { "Invalid/unsupported isbn format" }
+    }
+
+    /**
      * ISBN-13 のチェックディジット計算
      *
      * @throws IllegalArgumentException
@@ -58,6 +74,16 @@ value class ISBN(private val value: String) {
     }
 
     /**
+     * ISBN-13 のフォーマット検査
+     *
+     * @throws IllegalArgumentException
+     */
+    @VisibleForTesting
+    fun checkFormatISBN13() {
+        require(ISBN13_FORMAT.matches(digitsWithHyphen())) { "Invalid/unsupported isbn format" }
+    }
+
+    /**
      * ISBN として有効な文字列を返す
      * ISBN は数字もしくは'X'を文字列として含む
      *
@@ -65,7 +91,18 @@ value class ISBN(private val value: String) {
      */
     fun digits(): String = value.replace(NOT_DIGITS_OR_NOT_X, "")
 
+    /**
+     * ハイフンを含む ISBN として有効な文字列を返す
+     *
+     * @return String digits ハイフンを含む ISBN として有効な文字列
+     */
+    @VisibleForTesting
+    fun digitsWithHyphen(): String = value.replace(NOT_DIGITS_OR_NOT_X_OR_NOT_HYPHEN, "")
+
     companion object {
         private val NOT_DIGITS_OR_NOT_X = Regex("[^\\dX]")
+        private val NOT_DIGITS_OR_NOT_X_OR_NOT_HYPHEN = Regex("[^\\dX-]")
+        private val ISBN10_FORMAT = Regex("^((?=.{11}([-])[\\dxX]\$)(?:\\d+\\2){3}[\\dxX])")
+        private val ISBN13_FORMAT = Regex("^(?:97[89])?([-]?)(?=(?:\\d\\1?){9}\\1[\\dxX]\$)(?:\\d+\\1){3}[\\dxX]")
     }
 }
