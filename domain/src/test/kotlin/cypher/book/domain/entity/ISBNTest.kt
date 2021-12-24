@@ -61,7 +61,7 @@ internal class ISBNTest {
     inner class CheckFormatISBN10 {
         @Test
         @DisplayName("checkChecksumISBN10でISBN-10のフォーマットが有効な場合は例外をスローしないこと")
-        fun checkFormatISBN10() {
+        fun checkFormatValidISBN10() {
             assertDoesNotThrow("想定しない例外スロー") {
                 ISBN("ISBN4-7897-1537-5")
             }
@@ -101,7 +101,7 @@ internal class ISBNTest {
     inner class CheckFormatISBN13 {
         @Test
         @DisplayName("checkChecksumISBN13でISBN-10のフォーマットが有効な場合は例外をスローしないこと")
-        fun checkFormatISBN13() {
+        fun checkFormatValidISBN13() {
             assertDoesNotThrow("想定しない例外スロー") {
                 ISBN("ISBN978-3-16-148410-0")
             }
